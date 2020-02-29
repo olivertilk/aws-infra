@@ -3,6 +3,9 @@ STACK_NAME=awsinfra
 REGION=us-east-1
 CLI_PROFILE=awsinfra
 EC2_INSTANCE_TYPE=t2.micro
+AWS_ACCOUNT_ID=`aws sts get-caller-identity --profile awsbootstrap \
+--query "Account" --output text`
+CODEPIPELINE_BUCKET="$STACK_NAME-$REGION-codepipeline-$AWS_ACCOUNT_ID"
 
 # Deploy the CloudFormation template
 echo -e "\n\n=========== Deploying main.yml ==========="
